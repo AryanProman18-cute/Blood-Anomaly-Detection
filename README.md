@@ -20,7 +20,7 @@ The purpose of this benchmark is to compare different anomaly-detection approach
 ## Visual Benchmark Results
 
 ### 1. Overall Performance Comparison
-![Benchmark Comparison](assets/benchmark_comparison.png)
+![Overall Performance Comparison](assets/f1_score_benchmark.png)
 
 *(A) Mean ± SD out-of-sample F1-score across 10 independent seed pairs. (B) Model precision, recall, and false-positive rates.*
 
