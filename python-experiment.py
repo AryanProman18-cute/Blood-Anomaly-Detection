@@ -8,9 +8,8 @@ from sklearn.neighbors import LocalOutlierFactor
 from sklearn.preprocessing import OneHotEncoder
 import sklearn
 
-# ---------------------------------------------------------
-# 1. SETUP & GLOBAL ENCODER
-# ---------------------------------------------------------
+
+# 1 SETUP & GLOBAL ENCODER
 BLOOD_GROUPS = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']
 BLOOD_GROUP_PROBS = [0.22, 0.015, 0.32, 0.02, 0.07, 0.005, 0.33, 0.02]
 BLOOD_GROUP_PROBS = [p / sum(BLOOD_GROUP_PROBS) for p in BLOOD_GROUP_PROBS]
@@ -46,9 +45,9 @@ def extract_features(df, enc):
     cat_encoded = enc.transform(df[['blood_group', 'state', 'test_status']].fillna('').astype(str))
     return pd.concat([f, pd.DataFrame(cat_encoded, index=df.index)], axis=1).values
 
-# ---------------------------------------------------------
-# 2. DATA GENERATION & SAFE ANOMALY INJECTION
-# ---------------------------------------------------------
+
+# 2 DATA GENERATION & SAFE ANOMALY INJECTION
+
 def generate_clean_dataset(n_total=2000, start_date=datetime(2026, 1, 1), seed=42):
     np.random.seed(seed)
     random.seed(seed)
@@ -100,10 +99,10 @@ def inject_anomalies(df_clean, anomaly_ratio=0.15, seed=42, mad_magnitude='extre
             df.at[idx, 'is_anomaly'], df.at[idx, 'anomaly_class'] = 1, cls_name
             if cls_name == 'MISSING_FIELDS': df.at[idx, random.choice(['blood_group', 'collection_timestamp', 'donor_id', 'test_status'])] = ''
             elif cls_name == 'DUPLICATE_RECORDS':
-                # FIXED: Force picking a clean record strictly preceding the anomaly index
+                # Force picking a clean record strictly preceding the anomaly index
                 clean_before = [c for c in clean_indices_set if c < idx]
                 while not clean_before:
-                    idx = random.choice(idx_group) # Reselect if row 0 chosen
+                    idx = random.choice(idx_group) 
                     clean_before = [c for c in clean_indices_set if c < idx]
                 df.at[idx, 'unit_id'] = df.at[random.choice(clean_before), 'unit_id']
             elif cls_name == 'CONFLICTING_RECORDS': df.at[idx, 'blood_group'] = 'AB-' if df.at[idx, 'blood_group'] == 'O+' else ('O+' if df.at[idx, 'blood_group'] != 'O+' else 'B+')
@@ -123,9 +122,9 @@ def inject_anomalies(df_clean, anomaly_ratio=0.15, seed=42, mad_magnitude='extre
                 elif mad_magnitude == 'subtle': df.at[idx, 'donor_weight'], df.at[idx, 'donor_hb'] = 98.0, 17.5
     return df
 
-# ---------------------------------------------------------
-# 3. DETECTORS
-# ---------------------------------------------------------
+
+# 3 DETECTORS
+
 class RuleBasedValidator:
     def __init__(self, donors_dict): self.donors_dict = donors_dict
     def detect(self, df):
@@ -175,9 +174,9 @@ def calc_metrics(y_true, y_pred):
     fpr = fp / (fp + tn) if (fp + tn) > 0 else 0.0
     return tp, fp, fn, tn, p, r, f1, fpr
 
-# ---------------------------------------------------------
-# 4. EXECUTION & CSV EXPORT
-# ---------------------------------------------------------
+
+# 4 EXECUTION & CSV EXPORT
+
 if __name__ == "__main__":
     print(f"\n--- SCIENTIFIC AUDIT VERIFICATION ---")
     print(f"Python: {sys.version.split()[0]} | NumPy: {np.__version__} | Pandas: {pd.__version__} | sklearn: {sklearn.__version__}")
@@ -192,7 +191,7 @@ if __name__ == "__main__":
     X_test = extract_features(df_test, GLOBAL_ENCODER)
     y_test = df_test['is_anomaly'].values
     
-    # Predict
+    # predict             :D
     iso_model = IsolationForest(contamination=0.15, random_state=42).fit(X_train)
     lof_model = LocalOutlierFactor(n_neighbors=20, contamination=0.15, novelty=True).fit(X_train)
     
