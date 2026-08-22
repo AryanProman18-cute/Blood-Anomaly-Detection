@@ -20,12 +20,11 @@ The purpose of this benchmark is to compare different anomaly-detection approach
 ## Visual Benchmark Results
 
 ### 1. Overall Performance Comparison
-![Benchmark Comparison](assets/benchmark_comparison.png)
-
+![Benchmark Comparison](https://github.com/AryanProman18-cute/Blood-Anomaly-Detection/blob/results/f1_score_benchmark.png)
 *(A) Mean ± SD out-of-sample F1-score across 10 independent seed pairs. (B) Model precision, recall, and false-positive rates.*
 
 ### 2. Per-Class Anomaly Detection Recall
-![Per-Class Anomaly Detection Recall](assets/per_class_recall.png)
+![Per-Class Anomaly Detection Recall](https://github.com/AryanProman18-cute/Blood-Anomaly-Detection/blob/results/per_class_recall.png)
 
 *Comparison of anomaly detection recall across all nine injected blood-bank data integrity failure modes.*
 
