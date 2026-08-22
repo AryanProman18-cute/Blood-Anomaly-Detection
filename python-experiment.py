@@ -78,7 +78,7 @@ def extract_features(df, enc):
     return pd.concat([f, cat_encoded_df], axis=1).values
 
 
-# 2. DATA GENERATION & SAFE ANOMALY INJECTION
+# 2 DATA GENERATION & SAFE ANOMALY INJECTION                    ;D HELLO!
 
 def generate_clean_dataset(n_total=2000, start_date=datetime(2026, 1, 1), seed=42):
     np.random.seed(seed)
