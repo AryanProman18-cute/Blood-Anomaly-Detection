@@ -1,5 +1,3 @@
-START OF README.md
-
 # Benchmarking Data-Integrity Anomaly Detection in Blood-Bank Transaction Records
 
 ## Overview
