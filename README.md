@@ -20,12 +20,12 @@ The purpose of this benchmark is to compare different anomaly-detection approach
 ## Visual Benchmark Results
 
 ### 1. Overall Performance Comparison
-![Overall Performance Comparison](assets/f1_score_benchmark.png)
+![Overall Performance Comparison](download/f1_score_benchmark.png)
 
 *(A) Mean ± SD out-of-sample F1-score across 10 independent seed pairs. (B) Model precision, recall, and false-positive rates.*
 
 ### 2. Per-Class Anomaly Detection Recall
-![Per-Class Anomaly Detection Recall](assets/per_class_recall.png)
+![Per-Class Anomaly Detection Recall](download/per_class_recall.png)
 
 *Comparison of anomaly detection recall across all nine injected blood-bank data integrity failure modes.*
 
