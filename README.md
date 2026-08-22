@@ -17,6 +17,19 @@ A **Hybrid Detector** combines the Rule-Based Validator and MAD detector.
 The purpose of this benchmark is to compare different anomaly-detection approaches under controlled and reproducible conditions. The dataset is synthetic, and the results should not be interpreted as evidence of clinical performance.
 
 ---
+## Visual Benchmark Results
+
+### 1. Overall Performance Comparison
+![Benchmark Comparison](assets/benchmark_comparison.png)
+
+*(A) Mean ± SD out-of-sample F1-score across 10 independent seed pairs. (B) Model precision, recall, and false-positive rates.*
+
+### 2. Per-Class Anomaly Detection Recall
+![Per-Class Anomaly Detection Recall](assets/per_class_recall.png)
+
+*Comparison of anomaly detection recall across all nine injected blood-bank data integrity failure modes.*
+
+---
 
 ## Methods
 
