@@ -250,6 +250,8 @@ The experiment generates the following result files:
 ├── metrics_per_class_oos.csv
 └── metrics_mad_sensitivity.csv
 
+```
+
 ## Limitations
 
 This benchmark is based entirely on **synthetically generated data** with controlled anomaly injection.
