@@ -249,3 +249,48 @@ The experiment generates the following result files:
 ├── metrics_sensitivity_oos.csv
 ├── metrics_per_class_oos.csv
 └── metrics_mad_sensitivity.csv
+
+## Limitations
+
+This benchmark is based entirely on **synthetically generated data** with controlled anomaly injection.
+
+Therefore:
+
+- The results describe performance on the predefined synthetic benchmark.
+- The anomaly taxonomy does not cover every possible blood-bank data-integrity failure.
+- The extreme numerical anomalies are intentionally exaggerated.
+- Unsupervised ML performance depends on feature representation and contamination settings.
+- The benchmark does not establish clinical safety, regulatory compliance, or production readiness.
+- Validation on real-world, appropriately governed and de-identified blood-bank data would be required before making operational or clinical claims.
+
+---
+
+## Research Interpretation
+
+The objective is not to establish a universally superior anomaly-detection algorithm.
+
+Instead, the benchmark demonstrates that different anomaly types have different structural characteristics.
+
+**Rule-based validation** is well suited to deterministic integrity violations such as missing fields, invalid states, duplicate identifiers, expiry violations, and traceability failures.
+
+**MAD-based detection** is effective for sufficiently large numerical deviations but becomes insensitive to smaller deviations.
+
+**Unsupervised machine-learning methods** can detect some anomalies, but their performance varies substantially across anomaly classes and parameter settings.
+
+The Hybrid detector demonstrates how deterministic validation and robust statistical detection can complement each other within the controlled benchmark.
+
+---
+
+## Citation
+
+If you use this benchmark, code, or results in academic work, please cite the accompanying manuscript:
+
+> Aryan Jain, “Benchmarking Data-Integrity Anomaly Detection in Blood-Bank Transaction Records.”
+
+---
+
+## Disclaimer
+
+This repository is intended for **research and educational purposes only**.
+
+It is not a medical device, clinical decision-support system, blood-bank management system, or substitute for validated clinical or regulatory software.
