@@ -8,9 +8,7 @@ from sklearn.neighbors import LocalOutlierFactor
 from sklearn.preprocessing import OneHotEncoder
 import sklearn
 
-# ---------------------------------------------------------
 # CONSTANTS & CONFIGURATION
-# ---------------------------------------------------------
 BLOOD_GROUPS = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']
 BLOOD_GROUP_PROBS = [0.22, 0.015, 0.32, 0.02, 0.07, 0.005, 0.33, 0.02]
 BLOOD_GROUP_PROBS = [p / sum(BLOOD_GROUP_PROBS) for p in BLOOD_GROUP_PROBS]
@@ -27,9 +25,9 @@ CLASSES = [
     'FORMAT_INCONSISTENCIES', 'TEMPORAL_ANOMALIES', 'STATISTICAL_BURSTS'
 ]
 
-# ---------------------------------------------------------
-# 1. ROBUST GLOBAL ENCODER (now includes component & storage_location)
-# ---------------------------------------------------------
+
+# 1 ROBUST GLOBAL ENCODER 
+
 def build_feature_encoder():
     bg_cats = BLOOD_GROUPS + ['O POS', 'o+', 'B POSITIVE', '']
     state_cats = ['AVAILABLE', 'ISSUED', 'TEST_DISCARD', 'EXPIRED_DISCARD', '']
@@ -79,9 +77,9 @@ def extract_features(df, enc):
 
     return pd.concat([f, cat_encoded_df], axis=1).values
 
-# ---------------------------------------------------------
+
 # 2. DATA GENERATION & SAFE ANOMALY INJECTION
-# ---------------------------------------------------------
+
 def generate_clean_dataset(n_total=2000, start_date=datetime(2026, 1, 1), seed=42):
     np.random.seed(seed)
     random.seed(seed)
@@ -195,9 +193,9 @@ def inject_anomalies(df_clean, anomaly_ratio=0.15, seed=42, mad_magnitude='extre
                     df.at[idx, 'donor_weight'], df.at[idx, 'donor_hb'] = 98.0, 17.5
     return df
 
-# ---------------------------------------------------------
-# 3. DETECTORS (TRAIN-CALIBRATED)
-# ---------------------------------------------------------
+
+# 3 DETECTORS
+
 class RuleBasedValidator:
     def __init__(self, donors_dict):
         self.donors_dict = donors_dict
@@ -276,9 +274,9 @@ def calc_metrics(y_true, y_pred):
     fpr = float(fp / (fp + tn)) if (fp + tn) > 0 else 0.0
     return tp, fp, fn, tn, p, r, f1, fpr
 
-# ---------------------------------------------------------
-# 4. EXECUTE FULL EXPERIMENTAL SUITE
-# ---------------------------------------------------------
+
+# 4 EXECUTE FULL EXPERIMENTAL SUITE
+
 if __name__ == "__main__":
     SEED_PAIRS = [
         (42, 100), (43, 101), (44, 102), (45, 103), (46, 104),
